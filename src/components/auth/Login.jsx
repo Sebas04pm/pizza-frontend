@@ -11,7 +11,8 @@ export const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (usuario) {
+    if (usuario && Object.keys(usuario).length !== 0) {
+      
       navigate("/sistema");
     }
   }, []);
