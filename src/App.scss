@@ -95,3 +95,19 @@ body {
     color: $danger;
   }
 }
+
+.login{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: -10;
+    background: url("./assets/img/home/pizzaporciones0.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .card-login{
+    width: 90%;
+  
+  }

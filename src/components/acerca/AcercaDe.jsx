@@ -10,7 +10,7 @@ export function AcercaDe() {
         subtitulo="Estamos orgullosos de cocinar para usted."
       />
       <div className="container my-5 text-start">
-        <div className="p-5 contenido-texto text-light fs-5">
+        <div className="p-5 contenido-texto fs-5">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla,
             tenetur? Nihil similique dolor reiciendis mollitia distinctio
