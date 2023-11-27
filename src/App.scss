@@ -42,3 +42,56 @@ body {
     transform: translateY(100px);
   }
 }
+
+// diseño de efecto hover en los items del navbar
+.nav-link {
+  margin-left: 5px;
+
+  &:after {
+    content: "";
+    height: 2px;
+    width: 0px;
+    display: block;
+    background-color: $danger;
+    transition: 0.5s ease-in-out;
+  }
+
+  &:hover:after {
+    height: 2px;
+    width: 100%;
+    display: block;
+  }
+}
+
+.header {
+  height: 50vh;
+  background: url("./assets/img/home/banner1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+
+  .header-bg {
+    background: rgba(#000, $alpha: 0.5);
+  }
+
+  h1 {
+    font-family: "heavitas";
+    color: $danger;
+  }
+
+  h4 {
+    font-family: "petrov";
+    color: $success;
+  }
+}
+
+.contenido-texto p {
+  font-family: "altone";
+  text-indent: 50px;
+  &:nth-of-type(1)::first-letter {
+    font-size: 200%;
+    font-weight: bold;
+    color: $danger;
+  }
+}
