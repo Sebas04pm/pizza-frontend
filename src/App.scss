@@ -2,6 +2,43 @@
 @import "./scss/fonts";
 @import "./scss/animations";
 
-
 // importacion de bootstrap
-@import 'bootstrap';
+@import "bootstrap";
+
+body {
+  background: $dark;
+  color: $light;
+}
+
+.ff-altone {
+  font-family: altone;
+}
+
+.pizzaPng1 {
+  width: 250px;
+  margin-top: 50px;
+  animation: animacion3 25s linear infinite;
+}
+
+.pizzaPng2 {
+  width: 220px;
+  transform: translateY(50px);
+  animation: animacion2 30s linear infinite alternate;
+}
+
+.pizzaPng3 {
+  width: 100%;
+  animation: animacion1 5s linear infinite alternate;
+}
+
+@include media-breakpoint-up(md) {
+  .pizzaPng1 {
+    width: 300px;
+    transform: translateY(100px);
+  }
+
+  .pizzaPng2 {
+    width: 350px;
+    transform: translateY(100px);
+  }
+}
