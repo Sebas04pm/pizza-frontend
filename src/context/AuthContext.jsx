@@ -36,8 +36,6 @@ export const AuthProvider = ({ children }) => {
           const datos = response.data;
           datos.token = token;
 
-          console.log(datos);
-
           localStorage.setItem("usuario", JSON.stringify(datos));
           dispath({ type: "INICIAR_SESION", payload: datos });
           navigate(ruta);

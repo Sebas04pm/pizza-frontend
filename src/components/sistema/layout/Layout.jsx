@@ -17,7 +17,7 @@ export const Layout = () => {
       navigate("cuenta");
     } else {
       const token = usuario.token;
-
+      
       axios
         .get(`${url}api/usuarios/verificar/usuario`, {
           headers: {
