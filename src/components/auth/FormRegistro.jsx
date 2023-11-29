@@ -42,7 +42,7 @@ export const FormRegistro = ({ setRegistro }) => {
       })
       .then((res) => {
         Swal.fire({
-          title: "Error!",
+          title: "Exito!",
           icon: "success",
           text: "Exito al crear la cuenta, por favor inicie sesión.",
           confirmButtonText: "Continuar",

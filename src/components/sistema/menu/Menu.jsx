@@ -3,8 +3,10 @@ import { MenuItem } from "./MenuItem";
 import { PizzasContext } from "../../../context/PizzasContext";
 import { useContext, useEffect, useState } from "react";
 import { BotonCrear } from "./BotonCrear";
+import { AuthContext } from "../../../context/AuthContext";
 
 export const Menu = () => {
+  const { usuario } = useContext(AuthContext);
   const { pizzas, listaPizzas } = useContext(PizzasContext);
   const [cargando, setCargando] = useState(false);
   const cargarPizzas = async () => {
@@ -17,7 +19,7 @@ export const Menu = () => {
   }, []);
   return (
     <>
-      <BotonCrear />
+      {usuario.rol == "admin" ? (<BotonCrear />) : ""}
       <h1 className="text-center text-danger">MENÚ</h1>
 
       {cargando ? (

@@ -76,7 +76,7 @@ export const CambiarImagen = () => {
       {!cambiarImagen ? (
         <Button
           variant="danger"
-          className="rounded-pill text-white"
+          className="rounded-pill text-white mb-3"
           onClick={() => {
             setCambiarImagen(true);
           }}
