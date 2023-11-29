@@ -96,18 +96,39 @@ body {
   }
 }
 
-.login{
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    z-index: -10;
-    background: url("./assets/img/home/pizzaporciones0.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.seccion2 {
+  background: url("./assets/img/restaurant.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  .contenido {
+    width: 50%;
+    background: rgba(#000, $alpha: 0.6);
+    padding-top: 1rem * 5;
+    padding-bottom: 1rem * 5;
+
+    .sec2text {
+      font-family: "petrov";
+      font-weight: bolder;
+    }
+    .sec2subtext {
+      font-family: "altone";
+      text-align: center;
+    }
   }
-  
-  .card-login{
-    width: 90%;
-  
-  }
+}
+
+.login {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: -10;
+  background: url("./assets/img/home/pizzaporciones0.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-login {
+  width: 90%;
+}
