@@ -1,14 +1,18 @@
+import { useContext, useState } from "react";
 import { Accordion, Row, Col, Form, Card, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
+import { AuthContext } from "../../../context/AuthContext";
 import imgUsuario from "../../../assets/img/usuario.jpg";
-import { useState } from "react";
 import { BotonModalEditar } from "./BotonModalEditar";
+import { url } from "../../../backend";
+import axios from "axios";
 
-export const Usuario = ({ item }) => {
+
+export const Usuario = (props) => {
+  const { usuario } = useContext(AuthContext);
   const [editarDatos, setEditarDatos] = useState(false);
-
-  const eliminar = (id) => {
+  const eliminar = async (id = props.usuario._id) => {
     Swal.fire({
       title: "Seguro?",
       text: "No se podra recuperar el usuario!",
@@ -18,29 +22,43 @@ export const Usuario = ({ item }) => {
       cancelButtonColor: "#444444",
       confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Eliminado!",
-          text: "El usuario ha sido eliminado con exito.",
-          icon: "success",
-          showConfirmButton: true,
-          confirmButtonText: "Continuar",
-          confirmButtonColor: "#9e8901",
-        });
+        const token = usuario.token;
+        await axios
+          .delete(`${url}api/usuarios/${id}`, {
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then(async function (response) {
+            Swal.fire({
+              title: "Eliminado!",
+              text: "El usuario ha sido eliminado con exito.",
+              icon: "success",
+              showConfirmButton: true,
+              confirmButtonText: "Continuar",
+              confirmButtonColor: "#9e8901",
+            });
+            props.cargarUsuarios();
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          })
       }
     });
   };
 
   return (
-    <Accordion.Item eventKey={item}>
+    <Accordion.Item eventKey={props.usuario.nombres}>
       <Accordion.Header>
         <img
           src={imgUsuario}
           alt="imgUsuario"
           className="usuairo-item-img rounded-pill mx-3"
         />
-        Accordion Item #{item}
+        {props.usuario.nombres}
       </Accordion.Header>
       <Accordion.Body className="bg-dark-warning">
         <Card className="bg-dark text-light">
