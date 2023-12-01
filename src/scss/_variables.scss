@@ -3,6 +3,17 @@ $danger: #e7272d;
 $warning: #ffe119;
 $dark: #202020;
 $secondary: #dfdfdf;
+
+$theme-colors: (
+  "secondary":    $secondary,
+  "success":      $success,
+  "warning":      $warning,
+  "danger":       $danger,
+  "dark":         $dark,
+  "light":      rgb(248,249,250),
+  "dark-warning":#332701
+);
+
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -11,3 +22,13 @@ $grid-breakpoints: (
   xl: 1200px,
   xxl: 1400px
 );
+
+$accordion-button-active-bg: $warning;
+$accordion-button-bg: #313131;
+$accordion-button-color: $warning;
+$accordion-button-active-color: #313131;
+$accordion-button-focus-border-color: rgba(0,0,0,0);
+$accordion-button-focus-box-shadow: rgba(0,0,0,0);
+$accordion-icon-color: $warning;
+$accordion-icon-active-color: #313131;
+$accordion-padding-y: .5rem;

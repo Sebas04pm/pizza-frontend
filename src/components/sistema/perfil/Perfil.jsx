@@ -5,7 +5,7 @@ import { FormularioDatos } from "./FormularioDatos";
 export const Perfil = () => {
   return (
     <>
-      <h1 className="text-center text-danger mb-5">Perfil</h1>
+      <h1 className="text-center text-warning mb-5">Perfil</h1>
 
       <Container>
         <Row>
