@@ -34,7 +34,7 @@ export const NavBar = () => {
               <Link to={"/sistema/perfil"} className="nav-link px-3">
                 Perfil
               </Link>
-              {usuario.rol == "desarrollo" ? (
+              {usuario.rol == "admin" ? (
                 <Link to={"/sistema/usuarios"} className="nav-link px-3">
                   Usuarios
                 </Link>

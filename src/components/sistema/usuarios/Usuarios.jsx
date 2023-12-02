@@ -1,5 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { Accordion, Container, Spinner, Alert, Form, InputGroup, Button } from "react-bootstrap";
+import {
+  Accordion,
+  Container,
+  Spinner,
+  Alert,
+  Form,
+  InputGroup,
+  Button,
+} from "react-bootstrap";
 import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import { Usuario } from "./Usuario";
@@ -8,10 +16,12 @@ import { useNavigate } from "react-router-dom";
 import { BotonModalAgregar } from "./BotonModalAgregar";
 
 export const Usuarios = () => {
-  const { usuario } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [listaUsuarios, setListaUsuarios] = useState([]);
+  const { usuario } = useContext(AuthContext);
   const [cargando, setCargando] = useState(false);
+
+  const [items, setItems] = useState([]);
+  const [listaUsuarios, setListaUsuarios] = useState([]);
 
   const cargarUsuarios = async () => {
     setCargando(true);
@@ -27,6 +37,7 @@ export const Usuarios = () => {
       .then(async function (response) {
         const lista = response.data;
         setListaUsuarios(lista);
+        setItems(lista);
       })
       .catch(function (error) {
         console.log(error.response);
@@ -34,6 +45,11 @@ export const Usuarios = () => {
       .finally(() => {
         setCargando(false);
       });
+  };
+
+  const handleChange = (e) => {
+    const re = new RegExp(e.target.value, "i");
+    setItems(listaUsuarios.filter((usuario) => re.test(usuario.nombres)));
   };
 
   useEffect(() => {
@@ -53,6 +69,14 @@ export const Usuarios = () => {
         </div>
       ) : (
         <Container className="my-5">
+          <div className="mb-3 w-100">
+            <Form.Control
+              type="text"
+              onChange={handleChange}
+              placeholder="Buscar por nombre"
+            />
+          </div>
+
           {listaUsuarios.length < 1 ? (
             <div className="w-100 mt-5">
               <Alert variant="warning" className="text-center">
@@ -63,11 +87,18 @@ export const Usuarios = () => {
             </div>
           ) : (
             <>
-
               <Accordion>
-                {listaUsuarios.map((usuario, k) => (
-                  <Usuario key={k} usuario={usuario} cargarUsuarios={cargarUsuarios} />
-                ))}
+                {items.map((usuarioData, k) => {
+                  if (usuario._id != usuarioData._id) {
+                    return (
+                      <Usuario
+                        key={k}
+                        usuario={usuarioData}
+                        cargarUsuarios={cargarUsuarios}
+                      />
+                    );
+                  }
+                })}
               </Accordion>
             </>
           )}
