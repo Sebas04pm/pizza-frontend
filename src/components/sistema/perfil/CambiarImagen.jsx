@@ -75,8 +75,8 @@ export const CambiarImagen = () => {
 
       {!cambiarImagen ? (
         <Button
-          variant="danger"
-          className="rounded-pill text-white mb-3"
+          variant="warning"
+          className="rounded-pill mb-3"
           onClick={() => {
             setCambiarImagen(true);
           }}
@@ -97,15 +97,15 @@ export const CambiarImagen = () => {
             </Form.Group>
 
             <Button
-              variant="danger"
-              className="rounded-pill text-white me-3"
+              variant="warning"
+              className="rounded-pill me-3"
               type="submit"
             >
               Aceptar
             </Button>
 
             <Button
-              variant="secondary"
+              variant="danger"
               className="rounded-pill text-dark"
               onClick={() => {
                 setCambiarImagen(false);

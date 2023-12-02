@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Row, Col, Form, Card, InputGroup } from "react-bootstrap";
+import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 
 export const FormularioEditar = ({
   usuario,
@@ -43,7 +44,7 @@ export const FormularioEditar = ({
             <Form.Label>Teléfono:</Form.Label>
             <Form.Control
               type="text"
-							name="telefono"
+              name="telefono"
               disabled={!editarDatos}
               placeholder={usuario.telefono ? usuario.telefono : " "}
               value={datosEditar.telefono}

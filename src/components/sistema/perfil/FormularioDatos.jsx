@@ -5,6 +5,9 @@ import {
   HouseDoorFill,
   PersonVcard,
   TelephoneFill,
+  EyeFill,
+  EyeSlashFill,
+  KeyFill,
 } from "react-bootstrap-icons";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
@@ -18,10 +21,13 @@ export const FormularioDatos = () => {
     correo: usuario.correo,
     telefono: usuario.telefono ? usuario.telefono : "",
     direccion: usuario.direccion ? usuario.direccion : "",
+    password: "",
   };
   const [editar, setEditar] = useState(false);
   const [datos, setDatos] = useState(estadoInicial);
   const [cargando, setCargando] = useState(false);
+  const [editarPass, setEditarPass] = useState(false);
+  const [passVisible, setPassVisible] = useState(true);
 
   const handleChange = (e) => {
     setDatos({ ...datos, [e.target.name]: e.target.value });
@@ -54,6 +60,7 @@ export const FormularioDatos = () => {
           direccion: resultado.direccion ? resultado.direccion : "",
         });
         setEditar(false);
+        setEditarPass(false);
         Swal.fire({
           title: "Exito!",
           icon: "success",
@@ -90,7 +97,7 @@ export const FormularioDatos = () => {
             <Col xs={12} lg={6}>
               <p>Nombre y Apellido:</p>
               <InputGroup className="mb-3">
-                <InputGroup.Text className="bg-danger text-white">
+                <InputGroup.Text className="bg-warning">
                   <PersonVcard />
                 </InputGroup.Text>
                 <Form.Control
@@ -105,7 +112,7 @@ export const FormularioDatos = () => {
             <Col xs={12} lg={6}>
               <p>Corre electrónico:</p>
               <InputGroup className="mb-3">
-                <InputGroup.Text className="bg-danger text-white">
+                <InputGroup.Text className="bg-warning">
                   <EnvelopeFill />
                 </InputGroup.Text>
                 <Form.Control
@@ -120,7 +127,7 @@ export const FormularioDatos = () => {
             <Col xs={12} lg={6}>
               <p>Teléfono:</p>
               <InputGroup className="mb-3">
-                <InputGroup.Text className="bg-danger text-white">
+                <InputGroup.Text className="bg-warning">
                   <TelephoneFill />
                 </InputGroup.Text>
                 <Form.Control
@@ -135,7 +142,7 @@ export const FormularioDatos = () => {
             <Col xs={12} lg={6}>
               <p>Dirección:</p>
               <InputGroup className="mb-3">
-                <InputGroup.Text className="bg-danger text-white">
+                <InputGroup.Text className="bg-warning">
                   <HouseDoorFill />
                 </InputGroup.Text>
                 <Form.Control
@@ -148,12 +155,32 @@ export const FormularioDatos = () => {
               </InputGroup>
             </Col>
           </Row>
+          {editarPass ? (
+            <Col sx={12}>
+              <p>Contraseña:</p>
+              <InputGroup className="mb-3">
+                <InputGroup.Text className="bg-warning">
+                  <KeyFill />
+                </InputGroup.Text>
+                <Form.Control
+                  name="password"
+                  type={!passVisible ? "text" : "password"}
+                  onChange={handleChange}
+                />
+                <InputGroup.Text onClick={() => setPassVisible(!passVisible)}>
+                  {passVisible ? <EyeFill /> : <EyeSlashFill />}
+                </InputGroup.Text>
+              </InputGroup>
+            </Col>
+          ) : (
+            ""
+          )}
 
           <div className="w-100 text-center">
             {!editar ? (
               <Button
-                variant="danger"
-                className="my-3 me-3 text-white rounded-pill"
+                variant="warning"
+                className="my-3 me-3 rounded-pill"
                 onClick={() => {
                   setEditar(true);
                 }}
@@ -162,30 +189,50 @@ export const FormularioDatos = () => {
               </Button>
             ) : (
               <div>
-                <Button
-                  variant="danger"
-                  className="mt-3 me-3 text-white rounded-pill"
-                  type="submit"
-                >
-                  Aceptar
-                </Button>
+                <Row className="mt-3">
+                  {!editarPass ? (
+                    <Col sx={12} lg={4} className="px-1">
+                      <Button
+                        variant="warning"
+                        className="w-100 mb-3 rounded-pill"
+                        onClick={() => setEditarPass(true)}
+                      >
+                        Editar Contraseña
+                      </Button>
+                    </Col>
+                  ) : (
+                    ""
+                  )}
 
-                <Button
-                  variant="secondary"
-                  className="rounded-pill text-dark mt-3"
-                  onClick={() => {
-                    setEditar(false);
-                    setDatos(estadoInicial);
-                  }}
-                >
-                  Cancelar
-                </Button>
+                  <Col sx={12} lg={!editarPass ? 4 : 6} className="px-1">
+                    <Button
+                      variant="warning"
+                      className="w-100 mb-3 rounded-pill"
+                      type="submit"
+                    >
+                      Aceptar
+                    </Button>
+                  </Col>
+                  <Col sx={12} lg={!editarPass ? 4 : 6} className="px-1">
+                    <Button
+                      variant="danger"
+                      className="rounded-pill text-dark w-100 mb-3"
+                      onClick={() => {
+                        setEditarPass(false);
+                        setEditar(false);
+                        setDatos(estadoInicial);
+                      }}
+                    >
+                      Cancelar
+                    </Button>
+                  </Col>
+                </Row>
               </div>
             )}
           </div>
         </Form>
       ) : (
-        <Spinner animation="border" variant="danger" />
+        <Spinner animation="border" variant="warning" />
       )}
     </Col>
   );

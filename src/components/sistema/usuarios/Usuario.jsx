@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { EyeFill, EyeSlashFill } from "react-bootstrap-icons";
 
 import { url } from "../../../backend";
 import { AuthContext } from "../../../context/AuthContext";
@@ -94,7 +93,10 @@ export const Usuario = (props) => {
       }
     }
 
-    if (vacio) return;
+    if (vacio) {
+      setCargando(false);
+      return;
+    }
 
     await axios
       .put(`${url}api/usuarios/${props.usuario._id}`, formData, {
@@ -255,9 +257,17 @@ export const Usuario = (props) => {
                         </div>
                       </div>
                       <div className="d-block d-md-none">
-                        <Button variant="warning rounded-pill  w-100 mb-3">
-                          Editar Contraseña
-                        </Button>
+                        {!editarPass ? (
+                          <Button
+                            variant="warning rounded-pill  w-100 mb-3"
+                            onClick={() => setEditarPass(true)}
+                          >
+                            Editar Contraseña
+                          </Button>
+                        ) : (
+                          ""
+                        )}
+
                         <Button
                           variant="warning rounded-pill  w-100 mb-3"
                           type="submit"
@@ -266,7 +276,7 @@ export const Usuario = (props) => {
                         </Button>
                         <Button
                           variant="danger rounded-pill  w-100 mb-3"
-                          onClick={() => setEditarDatos(false)}
+                          onClick={cancelar}
                         >
                           Cancelar
                         </Button>
